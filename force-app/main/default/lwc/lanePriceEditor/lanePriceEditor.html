@@ -1,0 +1,312 @@
+<template>
+    <template lwc:if={showSubmitPage}>
+        <div class="success-container" style={containerStyle}>
+            <div class="success-content">
+                <div class="logo-container">
+                    <img if:true={logo} src={logo} alt="Company Logo" class="success-logo" />
+                    <h1 class="success-title">Transport Quoting Dashboard</h1>
+                </div>
+                <div class="success-message-container">
+                    <p class="success-message-text">You have successfully submitted your price data!</p>
+                    <div class="success-button-container">
+                        <p class="success-thank-you-text">Thank you!</p>
+                        <lightning-button
+                            label="Login"
+                            variant="success"
+                            class="success-login-button"
+                            onclick={handleThankYouClick}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template lwc:if={getIsLoadingPage}>
+        <div class="login-container" style={loginContainerStyle}>
+            <div class="login-content">
+                <h1 class="login-title">Transport Pricing Portal</h1>
+                <template lwc:if={thisCodeCheckingIfValid}>
+                    <p class="error-message" aria-live="assertive">Incorrect access code</p>
+                </template>
+                <lightning-input
+                    type="text" 
+                    value={inputCode} 
+                    onchange={handleCodeChange}
+                    placeholder="Enter Access Code"
+                    class="login-input">
+                </lightning-input>
+                <lightning-button
+                    label="Submit" 
+                    variant="success" 
+                    onclick={handleCodeSubmit}
+                    class="login-button">
+                </lightning-button>
+            </div>
+        </div>
+    </template>
+
+    <template lwc:if={getIsWorkPage}>
+        <div class="container compact-ui" style={containerStyle}>
+            <lightning-spinner lwc:if={isLoading}></lightning-spinner>
+
+            <div class="header-content slds-text-align_center">
+                <img if:true={logo} src={logo} alt="Company Logo" class="logo-image" />
+                <h1 class="page-title slds-text-heading_large">Transport Quoting Dashboard</h1>
+            </div>
+
+            <template if:true={account}>
+                <lightning-card title={title} icon-name="standard:account" class="slds-m-bottom_medium">
+
+                    <template if:true={showNotification}>
+                        <div class={notificationClass} role="alert">
+                            <span class="slds-assistive-text">{notificationVariant}</span>
+                            <span class="slds-icon_container slds-m-right_x-small">
+                                <lightning-icon 
+                                    icon-name={notificationIcon}
+                                    alternative-text={notificationVariant}
+                                    size="x-small"
+                                    variant="inverse">
+                                </lightning-icon>
+                            </span>
+                            <h2>
+                                <strong>{notificationTitle}:</strong> {notificationMessage}
+                            </h2>
+                            <button class="slds-button slds-notify__close slds-button_icon-inverse" 
+                                    title="Close" 
+                                    onclick={hideNotification}>
+                                <lightning-icon 
+                                    icon-name="utility:close"
+                                    alternative-text="Close"
+                                    size="x-small"
+                                    variant="inverse">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </template>
+
+                    <div class="slds-p-horizontal_medium">
+                        <template if:false={getAllowChanges}>
+                            <div class="buttonsGrid">
+                                <div class="center">
+                                    <lightning-button
+                                        class="slds-"
+                                        label="Save & Submit" 
+                                        variant="success" 
+                                        slot="actions"
+                                        onclick={handleSubmit}
+                                        disabled={isLoading}>
+                                    </lightning-button>
+                                </div>
+                                <div class="center">
+                                    <lightning-button
+                                        class="temporary-save-button"
+                                        label="Save" 
+                                        variant="neutral" 
+                                        slot="actions"
+                                        onclick={handleSaveTemporary}
+                                        disabled={isLoading}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={getAllowChanges}>
+                            <div class="decimal-note" role="alert">
+                                <h2>{requestEditAccessText}</h2>
+                            </div>
+                            <div class="center">
+                                <lightning-button
+                                    class="slds-"
+                                    label="Request Edit Access" 
+                                    variant="brand" 
+                                    slot="actions"
+                                    onclick={handleRequestChanges}
+                                    disabled={getAllowChangesWasSend}>
+                                </lightning-button>
+                            </div>
+                            <template if:true={isTermporarySave}>
+                                <div class="decimal-note" role="alert">
+                                    <h2>{temporarySave}</h2>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+
+                    <template lwc:if={shouldShowTabs}>
+                        <lightning-tabset if:false={getAllowChanges}>
+                            <lightning-tab label="ECL Requested Routes" onactive={handleShowMandatoryLanes}>
+                                <div class="slds-p-horizontal_medium">
+                                    <c-route-filters
+                                        loading-country-filter={loadingCountryFilter}
+                                        delivery-country-filter={deliveryCountryFilter}
+                                        search-term={searchTerm}
+                                        loading-country-options={loadingCountryOptions}
+                                        delivery-country-options={deliveryCountryOptions}
+                                        current-page={currentPage}
+                                        total-pages={totalPages}
+                                        show-pagination={showPagination}
+                                        total-records={totalRecords}
+                                        start-record={startRecord}
+                                        end-record={endRecord}
+                                        is-search-active={isSearchActive}
+                                        onloadingcountrychange={handleLoadingCountryChange}
+                                        ondeliverycountrychange={handleDeliveryCountryChange}
+                                        onsearchchange={handleSearchChange}
+                                        onpagechange={handlePageChange}>
+                                    </c-route-filters>
+                                        
+                                    <template lwc:if={lanePrices}>
+                                        <div class="table-container">
+                                            <c-custom-datatable
+                                                key-field="id"
+                                                data={lanePrices}
+                                                columns={currentColumns}
+                                                read-only={getAllowChanges}
+                                                draft-values={draftValues}
+                                                oncellchange={handleLanePriceCellChange}
+                                                onsort={handleSort}
+                                                sorted-by={sortedBy}
+                                                sorted-direction={sortDirection}
+                                                suppress-bottom-bar
+                                                hide-checkbox-column>
+                                            </c-custom-datatable>
+                                        </div>
+                                    </template>
+                                    <template lwc:else>
+                                        <div class="slds-text-align_center slds-m-vertical_large">
+                                            <p class="slds-text-body_regular">No ECL requested routes available.</p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-tab>
+
+                            <lightning-tab label="Optional Routes" onactive={handleShowOtherLanes}> 
+                                <div class="slds-p-horizontal_medium">
+                                    <c-route-filters
+                                        loading-country-filter={loadingCountryFilter}
+                                        delivery-country-filter={deliveryCountryFilter}
+                                        search-term={searchTerm}
+                                        loading-country-options={loadingCountryOptions}
+                                        delivery-country-options={deliveryCountryOptions}
+                                        current-page={currentPage}
+                                        total-pages={totalPages}
+                                        show-pagination={showPagination}
+                                        total-records={totalRecords}
+                                        start-record={startRecord}
+                                        end-record={endRecord}
+                                        is-search-active={isSearchActive}
+                                        onloadingcountrychange={handleLoadingCountryChange}
+                                        ondeliverycountrychange={handleDeliveryCountryChange}
+                                        onsearchchange={handleSearchChange}
+                                        onpagechange={handlePageChange}>
+                                    </c-route-filters>
+
+                                    <template lwc:if={lanePrices}>
+                                        <div class="table-container">
+                                            <c-custom-datatable
+                                                key-field="id"
+                                                data={lanePrices}
+                                                columns={currentColumns}
+                                                read-only={getAllowChanges}
+                                                draft-values={draftValues}
+                                                oncellchange={handleLanePriceCellChange}
+                                                onsort={handleSort}
+                                                sorted-by={sortedBy}
+                                                sorted-direction={sortDirection}
+                                                suppress-bottom-bar
+                                                hide-checkbox-column>
+                                            </c-custom-datatable>
+                                        </div>
+                                    </template>
+                                    <template lwc:else>
+                                        <div class="slds-text-align_center slds-m-vertical_large">
+                                            <p class="slds-text-body_regular">No optional routes available.</p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-tab>
+
+                            <lightning-tab label="Previously Quoted Routes" onactive={handleShowExistingPrices} lwc:if={hasExistingPrices}> 
+                                <div class="slds-p-horizontal_medium">
+                                    <div class="decimal-note no-max-width" role="alert">
+                                        <h2>These routes already have prices from previous price requests with the same season and trailer type. Edit them here to update the price for the current season.</h2>
+                                    </div>
+                                    
+                                    <c-route-filters
+                                        loading-country-filter={loadingCountryFilter}
+                                        delivery-country-filter={deliveryCountryFilter}
+                                        search-term={searchTerm}
+                                        loading-country-options={loadingCountryOptions}
+                                        delivery-country-options={deliveryCountryOptions}
+                                        current-page={currentPage}
+                                        total-pages={totalPages}
+                                        show-pagination={showPagination}
+                                        total-records={totalRecords}
+                                        start-record={startRecord}
+                                        end-record={endRecord}
+                                        is-search-active={isSearchActive}
+                                        onloadingcountrychange={handleLoadingCountryChange}
+                                        ondeliverycountrychange={handleDeliveryCountryChange}
+                                        onsearchchange={handleSearchChange}
+                                        onpagechange={handlePageChange}>
+                                    </c-route-filters>
+
+                                    <template lwc:if={lanePrices}>
+                                        <div class="table-container">
+                                            <c-custom-datatable
+                                                key-field="id"
+                                                data={lanePrices}
+                                                columns={currentColumns}
+                                                read-only={getAllowChanges}
+                                                draft-values={draftValues}
+                                                oncellchange={handleLanePriceCellChange}
+                                                onsort={handleSort}
+                                                sorted-by={sortedBy}
+                                                sorted-direction={sortDirection}
+                                                suppress-bottom-bar
+                                                hide-checkbox-column>
+                                            </c-custom-datatable>
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-tab>
+
+                            <lightning-tab label="Additional Charges">
+                                <div class="slds-var-p-horizontal_medium">
+                                    <c-additional-charges
+                                        account-data={account}
+                                        read-only={getAllowChanges}
+                                        show-fuel-surcharge-percentage={showFuelSurchargePercentage}
+                                        show-additional-stops={showAdditionalStops}
+                                        show-seasonal-surcharge={showSeasonalSurcharge}
+                                        show-harbour-dues={showHarbourDues}
+                                        show-e-t-s={showETS}
+                                        show-dangerous-goods={showDangerousGoods}
+                                        show-tail-lift={showTailLift}
+                                        show-pallet-jack={showPalletJack}
+                                        show-pallet-exchange={showPalletExchange}
+                                        show-waiting-hour={showWaitingHour}
+                                        show-weekend-charges={showWeekendCharges}
+                                        show-plug-in={showPlugIn}
+                                        show-overnight-charges={showOvernightCharges}
+                                        show-two-drivers={showTwoDrivers}
+                                        show-direct-ferry={showDirectFerry}
+                                        onfieldchange={handleAdditionalChargesFieldChange}>
+                                    </c-additional-charges>
+                                </div>
+                            </lightning-tab>
+                        </lightning-tabset>
+                    </template>
+
+                    <template lwc:else>
+                        <div class="slds-text-align_center slds-m-vertical_x-large">
+                            <p class="slds-text-heading_small">No routes available for this price request.</p>
+                        </div>
+                    </template>
+                </lightning-card>
+            </template>
+        </div>
+    </template>
+    
+</template>

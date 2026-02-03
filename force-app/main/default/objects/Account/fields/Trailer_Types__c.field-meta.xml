@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trailer_Types__c</fullName>
+    <externalId>false</externalId>
+    <label>Trailer Types</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Dual temp</fullName>
+                <default>false</default>
+                <label>Dual temp</label>
+            </value>
+            <value>
+                <fullName>Frigo - ambient</fullName>
+                <default>false</default>
+                <label>Frigo - ambient</label>
+            </value>
+            <value>
+                <fullName>Frigo - chilled</fullName>
+                <default>false</default>
+                <label>Frigo - chilled</label>
+            </value>
+            <value>
+                <fullName>Frigo - frozen</fullName>
+                <default>false</default>
+                <label>Frigo - frozen</label>
+            </value>
+            <value>
+                <fullName>Frigo - split wall</fullName>
+                <default>false</default>
+                <label>Frigo - split wall</label>
+            </value>
+            <value>
+                <fullName>Curtainside - ambient</fullName>
+                <default>false</default>
+                <label>Curtainside - ambient</label>
+            </value>
+            <value>
+                <fullName>Box trailer</fullName>
+                <default>false</default>
+                <label>Box trailer</label>
+            </value>
+            <value>
+                <fullName>Cooled</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Cooled</label>
+            </value>
+            <value>
+                <fullName>Dual-temp</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Dual-temp</label>
+            </value>
+            <value>
+                <fullName>Frigo</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Frigo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

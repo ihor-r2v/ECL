@@ -1,0 +1,35 @@
+<template>
+    <!-- Start Screen - Mode Selection -->
+    <template if:true={showModeSelection}>
+        <c-cost-comparison-mode-selection 
+            onmodeselected={handleModeSelected}>
+        </c-cost-comparison-mode-selection>
+    </template>
+
+    <!-- Compare Prices Flow -->
+    <template if:true={showLaneSelector}>
+        <c-lane-selector 
+            saved-filters={savedFilters}
+            lane-selector-info={laneSelectorInfo}
+            onupdatelaneselector={handleLaneSelectorUpdate}
+            onprevioustomode={handlePreviousToMode}>
+        </c-lane-selector>
+    </template>
+    <template if:true={showLanePrice}>
+        <c-lane-price
+            lane-selector-info={laneSelectorInfo}
+            onselected={handleSelectedAccount}
+            onprevious={handlePreviousLanePrice}
+            onsuccess={handleSuccess}>
+        </c-lane-price>
+    </template>
+
+    <!-- Request Spot Price Flow -->
+    <template if:true={showRequestSpotPrice}>
+        <c-request-spot-price
+            saved-filters={savedFilters}
+            onprevious={handlePreviousFromSpotPrice}
+            onsuccess={handleSuccess}>
+        </c-request-spot-price>
+    </template>
+</template>

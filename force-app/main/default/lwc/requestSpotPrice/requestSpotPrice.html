@@ -1,0 +1,387 @@
+<template>
+    <!-- Step 1: Filter and Compare Spot Prices -->
+    <template if:false={showSpotLanePrice}>
+        <div class="slds-card">        
+            <div class="slds-card__body slds-card__body_inner">
+                <div class="main-container">
+
+                    <!-- Left Side - Filters -->
+                    <div class="filters-container">
+                        <div class="slds-media__body slds-var-m-bottom_small">
+                            <h2 class="slds-card__header-title">
+                                <template if:true={isAvailableTab}>
+                                    <span>Compare Spot Prices</span>
+                                     <span class="slds-text-body_small slds-var-p-left_small">Step 1 of 2</span>
+                                </template>
+                                <template if:false={isAvailableTab}>
+                                    <span>Request New Prices</span>
+                                </template>
+                            </h2>
+                        </div>
+
+                        <div class="slds-form-element slds-var-m-bottom_medium">
+                            <lightning-button
+                                variant="neutral"
+                                label="Previous"
+                                onclick={handlePrevious}
+                                icon-name="utility:back">
+                            </lightning-button>
+                        </div>
+
+                        <div class="filter-section">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="season">
+                                    Season:
+                                </label>
+                                <div class="slds-form-element__control lightning-dropdown">
+                                    <lightning-combobox
+                                        name="seasons"
+                                        label=""
+                                        value={selectedSeason}
+                                        placeholder="Select Season"
+                                        options={seasonOptions}
+                                        onchange={handleSeasonChange}
+                                        variant="label-hidden">
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+
+                            <div class="slds-form-element slds-var-m-top_medium">
+                                <label class="slds-form-element__label" for="trailer-type">
+                                    Trailer Type:
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <lightning-combobox
+                                        name="trailerType"
+                                        label=""
+                                        value={selectedTrailerType}
+                                        placeholder="Select Trailer Type"
+                                        options={trailerTypeOptions}
+                                        onchange={handleTrailerTypeChange}
+                                        variant="label-hidden"
+                                        disabled={isTrailerTypeDisabled}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+
+                            <div class="slds-form-element slds-var-m-top_medium">
+                                <label class="slds-form-element__label" for="loading-location">
+                                    Loading Location:
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <lightning-combobox
+                                        name="loadingLocation"
+                                        label=""
+                                        value={selectedLoadingLocation}
+                                        placeholder="Select Loading Location"
+                                        options={loadingLocationOptions}
+                                        onchange={handleLoadingLocationChange}
+                                        variant="label-hidden"
+                                        disabled={isLoadingLocationDisabled}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form-element slds-var-m-top_medium">
+                                <label class="slds-form-element__label" for="delivery-location">
+                                    Delivery Location:
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <lightning-combobox
+                                        name="deliveryLocation"
+                                        label=""
+                                        value={selectedDeliveryLocation}
+                                        placeholder="Select Delivery Location"
+                                        options={deliveryLocationOptions}
+                                        onchange={handleDeliveryLocationChange}
+                                        variant="label-hidden"
+                                        disabled={isDeliveryLocationDisabled}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side - Results -->
+                    <div class="results-container">
+                        <template if:true={isLoading}>
+                            <div class="slds-align_absolute-center slds-var-p-around_medium">
+                                <lightning-spinner alternative-text="Loading carriers..." size="medium"></lightning-spinner>
+                            </div>
+                        </template>
+
+                        <template if:true={showNoResults}>
+                            <div class="no-results">
+                                <lightning-icon icon-name="utility:search" size="large"></lightning-icon>
+                                <p class="slds-var-m-top_medium">No carriers found for the selected criteria</p>
+                            </div>
+                        </template>
+
+                        <template if:true={showResults}>
+                            <!-- TOP NAVIGATION -->
+                            <div class="header-navigation">
+                                <h3 class="slds-text-heading_medium slds-var-m-left_small">
+                                    {selectedLoadingLocationName} → {selectedDeliveryLocationName}
+                                </h3>
+                                <div class="button-group-navigation">
+                                    <lightning-button
+                                        variant="neutral"
+                                        label="Previous"
+                                        onclick={handlePrevious}
+                                        icon-name="utility:back">
+                                    </lightning-button>
+                                    <template if:true={isAvailableTab}>
+                                        <lightning-button
+                                            variant="brand"
+                                            label="Next"
+                                            onclick={handleNextToSpotLanePrice}
+                                            icon-name="utility:forward"
+                                            icon-position="right"
+                                            disabled={isNextDisabled}>
+                                        </lightning-button>
+                                    </template>
+                                    <template if:false={isAvailableTab}>
+                                        <lightning-button
+                                            variant="brand"
+                                            label="Create Price Requests"
+                                            icon-name="utility:record_create"
+                                            icon-position="right"
+                                            onclick={handleCreatePriceRequest}
+                                            disabled={isSendDisabled}>
+                                        </lightning-button>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Tabs -->
+                            <lightning-tabset active-tab-value={activeTab}>
+                                <!-- Available Prices Tab -->
+                                <lightning-tab label="Compare Spot Prices" value="available" onactive={handleShowAvailablePrices}>
+                                    <template if:true={hasAvailablePrices}>
+                                        <div class="accounts-container">
+                                            <template for:each={formattedAvailablePrices} for:item="account">
+
+                                                <div key={account.accountId} class={account.cardClass}>
+                                                    <div class="header-lane-selector">
+                                                        <div class="account-title">Carrier {account.displayIndex}:</div>
+                                                        
+                                                        <div class="account-name-container">
+                                                            <div class="account-name-lane-selector">{account.accountName}</div>
+                                                            <span class="preferred-label slds-var-p-top_xx-small">{account.preferredCarrierLabel}</span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="lane-info">
+                                                        <div class="lane-label">Lane:</div>
+                                                        <div class="lane-value">{account.laneName}</div>
+                                                        <div class="lane-label">Trailer Type:</div>
+                                                        <div class="lane-value">{account.trailerType}</div>
+
+                                                        <a class="navigate-link" data-record-id={account.lanePriceId} onclick={handleNavigateToRecord}>
+                                                            Navigate to record page →
+                                                        </a>
+                                                        
+                                                        <div class="grid-container">
+                                                            <div class="score-card">
+                                                                <div class="score-title">Price</div>
+                                                                <div class="score-value">{account.accountScores.priceScore}%</div>
+                                                            </div>
+                                                            <div class="score-card">
+                                                                <div class="score-title">Availability</div>
+                                                                <div class="score-value">{account.accountScores.availabilityScore}%</div>
+                                                            </div>
+                                                            <div class="score-card">
+                                                                <div class="score-title">Reliability</div>
+                                                                <div class="score-value">{account.accountScores.reliabilityScore}%</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="slds-grid slds-grid_align-spread total-section-lane-selector">
+                                                        <div class="slds-col lane-price">
+                                                            <div>Lane Price: € {account.formattedLanePrice}</div>
+                                                            <div>Total Price: € {account.formattedTotalPrice}</div>
+                                                        </div>
+                                                        <div class="slds-col">
+                                                            <lightning-icon 
+                                                                icon-name={account.chevronIcon} 
+                                                                size="medium" 
+                                                                alternative-text="Details" 
+                                                                class="clickable-icon"
+                                                                data-account-id={account.accountId}
+                                                                onclick={handleTotalPriceClick}>
+                                                            </lightning-icon>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- PRICE VARIABLES SECTION - MATCHING laneSelector -->
+                                                    <template if:true={account.expanded}>
+                                                        <div class="price-variables-header">
+                                                            <div class="slds-text-heading_small">Price variables:</div>
+                                                            <lightning-input 
+                                                                type="checkbox"
+                                                                label="Select All"
+                                                                data-account-id={account.accountId}
+                                                                class="slds-var-m-left_small"
+                                                                onchange={handleSelectAll}>
+                                                            </lightning-input>
+                                                        </div>
+
+                                                        <div class="pricing-section">
+                                                            <div class="price-row">
+                                                                <span class="price-label">Fuel Surcharge</span>
+                                                                <div class="price-checkbox-group">
+                                                                    <span class="price-value">{account.fuelSurchargePercentage}%</span>
+                                                                    <lightning-input 
+                                                                        type="checkbox" 
+                                                                        label="" 
+                                                                        data-account-id={account.accountId}
+                                                                        data-field="fuelSurchargePercentage"
+                                                                        checked={account.fuelSurchargePercentageIncluded}
+                                                                        onchange={handleCheckboxChange}>
+                                                                    </lightning-input>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="price-row">
+                                                                <span class="price-label">Additional Stops | Qty: 
+                                                                    <lightning-input
+                                                                        type="number"
+                                                                        variant="label-hidden"
+                                                                        min="1"
+                                                                        max="999"
+                                                                        class="inline-quantity-input"
+                                                                        data-account-id={account.accountId}
+                                                                        data-field="additionalStopsQuantity"
+                                                                        value={account.additionalStopsQuantity}
+                                                                        onchange={handleQuantityChange}
+                                                                        disabled={account.additionalStopsDisabled}>
+                                                                    </lightning-input>
+                                                                </span>
+                                                                <div class="price-checkbox-group">
+                                                                    <span class="price-value">€ {account.priceAdditionalStops}</span>
+                                                                    <lightning-input 
+                                                                        type="checkbox" 
+                                                                        label="" 
+                                                                        data-account-id={account.accountId}
+                                                                        data-field="priceAdditionalStops"
+                                                                        checked={account.priceAdditionalStopsIncluded}
+                                                                        onchange={handleCheckboxChange}>
+                                                                    </lightning-input>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+
+                                                    <template if:false={account.selectedAccount}>
+                                                        <div class="select-button-container">
+                                                            <button class="select-button" data-id={account.accountId} onclick={handleSelectAvailablePrice}>Select</button>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={account.selectedAccount}>
+                                                        <div class="select-button-container">
+                                                            <button class="select-button-picked" data-id={account.accountId} onclick={handleSelectAvailablePrice}>Preferred Supplier</button>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                    <template if:false={hasAvailablePrices}>
+                                        <div class="no-results">
+                                            <lightning-icon icon-name="utility:info" size="large"></lightning-icon>
+                                            <p class="slds-var-m-top_medium">No available prices found</p>
+                                        </div>
+                                    </template>
+                                </lightning-tab>
+
+                                <!-- Potential Carriers Tab -->
+                                <lightning-tab label="Request New Prices" value="potential" onactive={handleShowPotentialCarriers}>
+                                    <template if:true={hasPotentialCarriers}>
+                                        <div class="accounts-container potential-carriers">
+                                            <template for:each={potentialCarriers} for:item="carrier">
+                                                <div key={carrier.accountId} class={carrier.cardClass}>
+                                                    <div class="header-lane-selector">
+                                                        <div class="account-title">Carrier {carrier.displayIndex}:</div>
+                                                        <div class="account-name-container">
+                                                            <div class="account-name-lane-selector">{carrier.accountName}</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="lane-info">
+                                                        <div class="lane-label">Carrier Type: <span class="lane-value">{carrier.type}</span></div>
+                                                    </div>
+
+                                                    <div class="select-button-container">
+                                                        <template if:false={carrier.selected}>
+                                                            <button class="select-button" data-id={carrier.accountId} onclick={handleSelectCarrier}>
+                                                                Select
+                                                            </button>
+                                                        </template>
+                                                        <template if:true={carrier.selected}>
+                                                            <button class="select-button-picked" data-id={carrier.accountId} onclick={handleSelectCarrier}>
+                                                                Selected
+                                                            </button>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                    <template if:false={hasPotentialCarriers}>
+                                        <div class="no-results">
+                                            <lightning-icon icon-name="utility:info" size="large"></lightning-icon>
+                                            <p class="slds-var-m-top_medium">No potential carriers found</p>
+                                        </div>
+                                    </template>
+                                </lightning-tab>
+                            </lightning-tabset>
+
+                            <!-- BOTTOM NAVIGATION -->
+                            <div class="button-container slds-var-m-top_large">
+                                <div class="button-group-bottom">
+                                    <lightning-button
+                                        variant="neutral"
+                                        label="Previous"
+                                        onclick={handlePrevious}
+                                        icon-name="utility:back">
+                                    </lightning-button>
+                                    <template if:true={isAvailableTab}>
+                                        <lightning-button
+                                            variant="brand"
+                                            label="Next"
+                                            onclick={handleNextToSpotLanePrice}
+                                            icon-name="utility:forward"
+                                            icon-position="right"
+                                            disabled={isNextDisabled}>
+                                        </lightning-button>
+                                    </template>
+                                    <template if:false={isAvailableTab}>
+                                        <lightning-button
+                                            variant="brand"
+                                            label="Create Price Requests"
+                                            icon-name="utility:record_create"
+                                            icon-position="right"
+                                            onclick={handleCreatePriceRequest}
+                                            disabled={isSendDisabled}>
+                                        </lightning-button>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Step 2: Spot Lane Price Details -->
+    <template if:true={showSpotLanePrice}>
+        <c-spot-lane-price
+            lane-selector-info={spotLaneSelectorInfo}
+            onselected={handleSelectedAccountUpdate}
+            onprevious={handlePreviousFromSpotLanePrice}
+            onsuccess={handleSpotSuccess}>
+        </c-spot-lane-price>
+    </template>
+</template>

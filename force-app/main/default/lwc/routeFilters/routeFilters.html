@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-grid slds-gutters slds-wrap slds-var-m-bottom_medium">
+        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12">
+            <lightning-combobox
+                label="Loading Country"
+                value={loadingCountryFilter}
+                options={loadingCountryOptions}
+                onchange={handleLoadingCountryChange}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12">
+            <lightning-combobox
+                label="Delivery Country"
+                value={deliveryCountryFilter}
+                options={deliveryCountryOptions}
+                onchange={handleDeliveryCountryChange}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12">
+            <lightning-input
+                type="search"
+                label="Search Routes"
+                value={_searchTerm}
+                onchange={handleSearchChange}>
+            </lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12 slds-var-p-top_x-small">
+            <template if:true={showPagination}>
+                <div class="slds-var-m-top_medium">
+                    <div class="slds-text-align_center">
+                        <c-pagination
+                            current-page={currentPage}
+                            total-pages={totalPages}
+                            onpagechange={handlePageChange}>
+                        </c-pagination>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <template if:true={showRecordCount}>
+        <div class="slds-text-body_small slds-var-m-bottom_small">
+            <p class="slds-text-heading_small">Routes:</p>
+            <template if:false={isSearchActive}>
+                Showing {startRecord} to {endRecord} of {totalRecords} records
+            </template>
+            <template if:true={isSearchActive}>
+                Showing all {totalRecords} matching records
+            </template>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Low</fullName>
+        <default>true</default>
+        <label>Laag</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Medium</fullName>
+        <default>false</default>
+        <label>Normaal</label>
+    </standardValue>
+    <standardValue>
+        <fullName>High</fullName>
+        <default>false</default>
+        <label>Hoog</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Critical</fullName>
+        <default>false</default>
+        <label>Kritiek</label>
+    </standardValue>
+</StandardValueSet>

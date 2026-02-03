@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="loadingLocation" type="String" label="Loading Location Id"/>
+            <property name="destinationLocation" type="String" label="Destination Location Id"/>
+            <property name="seasonId" type="String" label="Season Id"/>
+            <property name="trailerType" type="String" label="Type Of Trailer"/>
+            <property name="deliveryDate" type="Date" label="Delivery Date"/>
+            <property name="selectedLineId" type="String" label="Selected Lane Id"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

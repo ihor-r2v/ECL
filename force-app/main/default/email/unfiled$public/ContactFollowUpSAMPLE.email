@@ -1,0 +1,1 @@
+Beste {!Contact.FirstName},    Mijn dank voor het erg prettige gesprek vandaag. Ik denk dat {!Organization.Name} veel te bieden heeft voor {!Account.Name} en ik zie dan ook uit naar de volgende vergadering.    Met vriendelijke groeten, {!User.FirstName}

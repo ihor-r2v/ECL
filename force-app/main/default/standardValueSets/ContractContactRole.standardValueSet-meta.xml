@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Business User</fullName>
+        <default>false</default>
+        <label>Zakelijke gebruiker</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Decision Maker</fullName>
+        <default>false</default>
+        <label>Besluitvormer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Economic Buyer</fullName>
+        <default>false</default>
+        <label>Utilitaire koper</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Economic Decision Maker</fullName>
+        <default>false</default>
+        <label>Utilitaire besluitvormer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Evaluator</fullName>
+        <default>false</default>
+        <label>Beoordelaar</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Executive Sponsor</fullName>
+        <default>false</default>
+        <label>Leidinggevende sponsor</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Influencer</fullName>
+        <default>false</default>
+        <label>Beïnvloeder</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Technical Buyer</fullName>
+        <default>false</default>
+        <label>Technische koper</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Overig</label>
+    </standardValue>
+</StandardValueSet>

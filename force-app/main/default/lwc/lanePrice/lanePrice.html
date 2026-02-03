@@ -1,0 +1,161 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-var-m-left_small">
+            <div class="header-content">
+                <h2 class="slds-card__header-title">
+                    <span>Lanes Comparison:</span>
+                    <span class="slds-text-body_small page-number slds-var-m-top_xx-small">Step 2 of 2</span>
+                </h2> 
+                <div class="button-group">
+                    <lightning-button
+                        variant="neutral"
+                        label="Previous"
+                        onclick={handlePrevious}
+                        icon-name="utility:back">
+                    </lightning-button>
+                    <lightning-button
+                        variant="brand"
+                        label="Create Preferred Supplier"
+                        onclick={handleSubmit}
+                        icon-name="utility:record_create"
+                        icon-position="right">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="container">
+                <template for:each={accounts} for:item="account">
+                    <div key={account.accountId} class={account.cardClass}>
+                        <div class="header-lane-price">
+                            <div class="account-title">Carrier {account.displayIndex}:</div>
+                            
+                            <div class="account-name-container">
+                                <div class="account-name-lane-price">{account.accountName}</div>
+                                <span class="preferred-label">{account.preferredCarrierLabel}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="lane-info">
+                            <div class="lane-label">Lane:</div>
+                            <div class="lane-value">{account.laneName}</div>
+                            <div class="lane-label">Trailer Type:</div>
+                            <div class="lane-value">{account.trailerType}</div>
+
+                            <a class="navigate-link" data-record-id={account.lanePriceId} onclick={handleNavigateToRecord}>
+                                Navigate to record page →
+                            </a>
+
+                            <div class="grid-container">
+                                <div class="score-card">
+                                    <div class="score-title">Price</div>
+                                    <div class="score-value">{account.accountScores.priceScore}%</div>
+                                </div>
+                                <div class="score-card">
+                                    <div class="score-title">Availability</div>
+                                    <div class="score-value">{account.accountScores.availabilityScore}%</div>
+                                </div>
+                                <div class="score-card">
+                                    <div class="score-title">Reliability</div>
+                                    <div class="score-value">{account.accountScores.reliabilityScore}%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid slds-grid_align-spread total-section-lane-price">
+                            <div class="slds-col total-price">
+                                <div>Lane Price: € {account.formattedLanePrice}</div>
+                                <div>Total Price: € {account.formattedTotalPrice}</div>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-icon 
+                                    icon-name={account.chevronIcon} 
+                                    size="small" 
+                                    alternative-text="Details" 
+                                    class="clickable-icon"
+                                    data-account-id={account.accountId}
+                                    onclick={handleTotalPriceClick}>
+                                </lightning-icon>
+                            </div>
+                        </div>
+                        
+                        <template if:true={account.expanded}>
+                            <div class="price-variables-header">
+                                <div class="slds-text-heading_small">Price variables:</div>
+                                <lightning-input 
+                                    type="checkbox"
+                                    label="Select All"
+                                    data-account-id={account.accountId}
+                                    onchange={handleSelectAll}>
+                                </lightning-input>
+                            </div>
+
+                            <div class="pricing-section">
+                                <template for:each={account.priceVariables} for:item="variable">
+                                    <div key={variable.field} class="price-row">
+                                        <span class="price-label">
+                                            {variable.label} 
+                                            <template if:true={variable.hasQuantity}> | Qty:
+                                                <lightning-input
+                                                    type="number"
+                                                    variant="label-hidden"
+                                                    min="1"
+                                                    max="999"
+                                                    class="inline-quantity-input"
+                                                    data-account-id={account.accountId}
+                                                    data-field={variable.quantityField}
+                                                    value={variable.quantity}
+                                                    onchange={handleQuantityChange}
+                                                    disabled={variable.disabled}>
+                                                </lightning-input>
+                                            </template>
+                                        </span>
+                                        <div class="price-checkbox-group">
+                                            <span class="price-value">{variable.displayValue}</span>
+                                            <lightning-input 
+                                                type="checkbox" 
+                                                label="" 
+                                                data-account-id={account.accountId}
+                                                data-field={variable.field}
+                                                data-value={variable.value}
+                                                checked={variable.included}
+                                                onchange={handleCheckboxChange}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <div class="select-button-container">
+                            <button 
+                                class={account.buttonClass}
+                                data-id={account.accountId} 
+                                onclick={handleSelect}>
+                                {account.buttonLabel}
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="button-group-bottom slds-var-p-top_medium">
+                <lightning-button
+                    variant="neutral"
+                    label="Previous"
+                    onclick={handlePrevious}
+                    icon-name="utility:back">
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="Create Preferred Supplier"
+                    onclick={handleSubmit}
+                    icon-name="utility:record_create"
+                    icon-position="right">
+                </lightning-button>
+            </div>
+
+        </div>
+    </div>
+</template>

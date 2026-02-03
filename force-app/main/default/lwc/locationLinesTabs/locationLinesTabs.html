@@ -1,0 +1,71 @@
+<template>
+    <lightning-tabset active-tab={activeTab} onactive={handleTabChange} variant="scoped">
+        <!-- Tab 1: All Lanes -->
+        <lightning-tab label="All Lanes" value="tab1">
+            <template if:true={hasLanes}>
+                <lightning-datatable
+                    key={datatableKey}
+                    key-field="Id"
+                    data={filteredLanes}
+                    columns={columns}
+                    max-row-selection="1"
+                    selected-rows={selectedRowIds}
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-m-around_medium">
+                    Error loading lanes: {error.body.message}
+                </p>
+            </template>
+            <template if:false={hasLanes}>
+                <p class="slds-text-body_regular slds-m-around_medium">No lanes found.</p>
+            </template>
+        </lightning-tab>
+
+        <!-- Tab 2: By Reliability Score -->
+        <lightning-tab label="Reliability Score" value="tab2">
+            <template if:true={hasSortedByReliability}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={sortedByReliability}
+                    columns={reliabilityColumns}
+                    hide-checkbox-column="true"
+                ></lightning-datatable>
+            </template>
+            <template if:false={hasSortedByReliability}>
+                <p class="slds-m-around_medium">No lanes found.</p>
+            </template>
+        </lightning-tab>
+
+        <!-- Tab 3: By Availability Score -->
+        <lightning-tab label="Availability Score" value="tab3">
+            <template if:true={hasSortedByAvailability}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={sortedByAvailability}
+                    columns={availabilityColumns}
+                    hide-checkbox-column="true"
+                ></lightning-datatable>
+            </template>
+            <template if:false={hasSortedByAvailability}>
+                <p class="slds-m-around_medium">No lanes found.</p>
+            </template>
+        </lightning-tab>
+
+        <!-- Tab 4: By Price Level -->
+        <lightning-tab label="Price Score" value="tab4">
+            <template if:true={hasSortedByPriceLevel}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={sortedByPriceLevel}
+                    columns={priceLevelColumns}
+                    hide-checkbox-column="true"
+                ></lightning-datatable>
+            </template>
+            <template if:false={hasSortedByPriceLevel}>
+                <p class="slds-m-around_medium">No lanes found.</p>
+            </template>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

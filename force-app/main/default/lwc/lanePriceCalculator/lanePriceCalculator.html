@@ -1,0 +1,460 @@
+<template>
+    <div class="compact-calculator">
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-p-around_small" style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 4px; margin-bottom: 0.75rem;">
+                {error}
+            </div>
+        </template>
+        
+        <template lwc:if={showResults}> 
+            <div class="price-summary" style="display: flex; justify-content: center; align-items: center; padding: 0.75rem; background: #f3f3f3; border-radius: 4px; margin-bottom: 0.5rem; max-width: 500px; width: 100%; text-align: center; margin: 0 auto 0.5rem auto;"> 
+                <span><strong>Total Price €: {getSalesPrice}</strong></span>
+                <span style="margin-left: 2rem;">Inner Margin €: {marginForThisLane}</span>
+            </div> 
+        </template>
+        
+        <template if:true={account}>           
+            <div class="compact-box">
+                <div class="compact-header">Carrier Pricing Values: {account.Name}</div>
+                <div class="compact-subheader">Click Calculate after adding any extra services</div>
+
+                <div class="compact-grid">
+                    <template if:true={lanePrice.Freight_Price__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Cost Price €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="string" 
+                                        value={lanePrice.Freight_Price__c}
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={lanePrice.Type_Of_Trailer__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Trailer Type:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="string" 
+                                        value={lanePrice.Type_Of_Trailer__c}
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.Fuel_surcharge_percentage__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Fuel Surcharge %:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Fuel_surcharge_percentage__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="field-helper">applied to cost price</div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Price_Per_Stop__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Price Per Stop €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Price_Per_Stop__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="field-helper">applied to cost price</div>
+                            <div class="count-row">
+                                <span class="count-label">Count:</span>
+                                <lightning-input 
+                                    type="number" 
+                                    value={pricePerStop} 
+                                    variant="label-hidden"
+                                    class="count-input"
+                                    onchange={handlePricePerStopChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.Seasonal_Surcharge__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Seasonal Fee %:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Seasonal_Surcharge__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={seasonalFee} 
+                                    variant="label-hidden"
+                                    onchange={handleSeasonalFeeChange}>
+                                </lightning-input>
+                            </div>
+                            
+                        </div>
+                    </template>
+
+                    
+                    <template if:true={account.Waiting_Hour__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Waiting Hour €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Waiting_Hour__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Count:</span>
+                                <lightning-input 
+                                    type="number" 
+                                    value={waitingHour} 
+                                    variant="label-hidden"
+                                    class="count-input"
+                                    onchange={handleWaitingHourChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.Overnight_charges_Price__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">O/N Charges €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Overnight_charges_Price__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={overnightCharges} 
+                                    variant="label-hidden"
+                                    onchange={handleOvernightChargesChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Harbour_Dues__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Harb Dues €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Harbour_Dues__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={harbourDues}
+                                    variant="label-hidden"
+                                    onchange={handleHarbourDuesChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.ETS__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">ETS €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.ETS__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={ets} 
+                                    variant="label-hidden"
+                                    onchange={handleETSChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.Plug_in__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Plug-in €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Plug_in__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={plugin} 
+                                    variant="label-hidden"
+                                    onchange={handlePluginChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.Weekend_Charges__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">W/E Charges €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Weekend_Charges__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={weekendCharges} 
+                                    variant="label-hidden"
+                                    onchange={handleWeekendChargesChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={account.Dangerous_Goods_Price__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">DG €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Dangerous_Goods_Price__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={dangerousGoods} 
+                                    variant="label-hidden"
+                                    onchange={handleDangerousGoodsChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Pallet_Exchange_Price__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Pallet Xchg €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Pallet_Exchange_Price__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Count:</span>
+                                <lightning-input 
+                                    type="number" 
+                                    value={palletExchange} 
+                                    variant="label-hidden"
+                                    class="count-input"
+                                    onchange={handlePalletExchangeChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Tail_Lift_Price__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Tail Lift €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Tail_Lift_Price__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={tailLift} 
+                                    variant="label-hidden"
+                                    onchange={handleTailLiftChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Pallet_Jack_Price__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Pallet Jack €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Pallet_Jack_Price__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={palletJack} 
+                                    variant="label-hidden"
+                                    onchange={handlePalletJackChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Price_2nd_Driver__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">2nd Driver €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Price_2nd_Driver__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={secondDriver} 
+                                    variant="label-hidden"
+                                    onchange={handleSecondDriverChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <template if:true={account.Price_Ferry__c}>
+                        <div class="compact-field">
+                            <div class="field-row">
+                                <span class="field-label">Price Ferry €:</span>
+                                <div class="field-value">
+                                    <lightning-input 
+                                        type="number" 
+                                        value={account.Price_Ferry__c}
+                                        step="0.01"
+                                        variant="label-hidden"
+                                        readonly>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            
+                            <div class="count-row">
+                                <span class="count-label">Add:</span>
+                                <lightning-input 
+                                    type="checkbox" 
+                                    checked={priceFerry} 
+                                    variant="label-hidden"
+                                    onchange={handlePriceFerryChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </template>
+
+    </div>
+</template>

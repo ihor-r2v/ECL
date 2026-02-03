@@ -1,0 +1,46 @@
+lightning-datatable {
+    --lwc-fontSize: 10px;
+    --slds-table-cell-spacing: 0.25rem;
+}
+
+.slds-table th,
+.slds-table td {
+    padding: 0.25rem !important;
+    font-size: 10px !important;
+}
+
+.slds-table th .slds-truncate {
+    font-size: 10px !important;
+    font-weight: 500 !important;
+}
+
+lightning-datatable {
+    max-height: 300px;
+}
+
+.search-section {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.75rem;
+}
+
+.search-row { 
+    display: block; 
+    max-width: 100%; 
+    padding: 0 1rem 1rem 1rem;
+    place-items: center;
+}
+
+.search-input { 
+    width: 100%; 
+    max-width: 500px; 
+}
+
+.search-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table-dimensions {
+    height: 400px;
+}

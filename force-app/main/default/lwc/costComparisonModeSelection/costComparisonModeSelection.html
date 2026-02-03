@@ -1,0 +1,53 @@
+<template>
+    <div class="slds-card">        
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="main-container">
+
+                <!-- Left Side - Mode Selection -->
+                <div class="filters-container">
+                    <div class="slds-media__body slds-var-m-bottom_small">
+                        <h2 class="slds-card__header-title">
+                            <span>Cost Comparison Tool</span>
+                        </h2>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="mode-card" onclick={handleComparePrices}>
+                            <div class="mode-icon">
+                                <lightning-icon icon-name="utility:chart" size="large"></lightning-icon>
+                            </div>
+                            <h3 class="mode-title">Compare Tender Prices</h3>
+                            <p class="mode-description">
+                                View and Compare lane prices from tender responses
+                            </p>
+                        </div>
+
+                        <div class="mode-card slds-var-m-top_medium" onclick={handleRequestSpotPrice}>
+                            <div class="mode-icon">
+                                <lightning-icon icon-name="utility:email" size="large"></lightning-icon>
+                            </div>
+                            <h3 class="mode-title">Compare Spot Prices</h3>
+                            <p class="mode-description">
+                                View, Compare and Request lane prices for spot price requests
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Information -->
+                <div class="results-container">
+                    <div class="info-section">
+                        <lightning-icon icon-name="utility:info" size="medium"></lightning-icon>
+                        <h3 class="slds-var-m-top_medium">Select a Mode</h3>
+                        <p class="slds-var-m-top_small">
+                            Choose <strong>Compare Tender Prices</strong> to view existing lane prices received from tender responses.
+                        </p>
+                        <p class="slds-var-m-top_small">
+                            Choose <strong>Compare Spot Prices</strong> to compare all other prices <strong>and request new Spot Prices</strong>. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

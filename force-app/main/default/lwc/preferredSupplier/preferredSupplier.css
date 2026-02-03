@@ -1,0 +1,163 @@
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 0px 20px 0px 20px;
+    flex-wrap: wrap;
+}
+
+.account-column {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.1);
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.account-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.account-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.lane-info {
+    margin-bottom: 20px;
+    /* padding-bottom: 15px; */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.lane-label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.lane-value {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.pricing-section {
+    margin-bottom: 10px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.price-label {
+    color: #666;
+}
+
+.price-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.total-section {
+    margin-top: 20px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.lane-price {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    flex: 1;
+}
+
+.total-price {
+    display: flex;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    align-items: baseline;
+}
+.total-price1 {
+    display: flex;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.section-title {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+.footer-button {
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.submit-button {
+    background-color: #0176d3;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #014486;
+}
+.column-header {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px; 
+}
+.lane-info-placeholder-summary {
+    height: 130px; 
+    margin-bottom: 22px; 
+}
+.lane-info-placeholder-price {
+    height: 40px; 
+    margin-bottom: 15px; 
+}
+.page-number {
+    display: flex; 
+    align-items: center; 
+    padding-left: 15px
+}
+
+.total-price-with-icon {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.clickable-icon {
+    cursor: pointer;
+    transform: scale(1.5); 
+    --slds-c-icon-color-foreground-default: #0176d3;
+}

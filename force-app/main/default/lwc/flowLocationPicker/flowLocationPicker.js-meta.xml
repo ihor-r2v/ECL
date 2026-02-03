@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Location Picker</masterLabel>
+    <description>LWC that lets Flow users select a Delivery Location__c record</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="selectedDeliveryLocationId" type="String" role="outputOnly" label="Selected Delivery Location Id"/>
+        </targetConfig>
+    </targetConfigs> -->
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Location Picker</masterLabel>
+    <description>LWC to select Delivery Location__c if Type = Delivery</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="selectedDeliveryLocationId" type="String" role="outputOnly" label="Selected Delivery Location Id"/>
+            <property name="typeValue" type="String" role="inputOnly" label="Location Type Input"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

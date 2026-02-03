@@ -1,0 +1,196 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body slds-m-bottom_small">
+                    <h2 class="slds-card__header-title slds-var-m-left_large">
+                        <span>Preferred Supplier:</span>
+                        <span class="slds-text-body_small page-number">Step 3 of 3</span>
+                    </h2>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="slds-button slds-button_neutral" onclick={handlePrevious}>Previous</button>
+                <button class="slds-button slds-button_brand" onclick={handleSubmit} disabled={isSubmitDisabled}>Submit</button>
+            </div>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="container">
+                <template for:each={accounts} for:item="account">
+                    <div key={account.accountId} class="account-column">
+                        <template if:true={account.isFirst}>
+                            <h3 class="slds-card__header-title">Summary:</h3>
+                            <div class="lane-info">
+                                <div class="lane-label">Lane:</div>
+                                <div class="lane-value slds-text-title_bold">{account.laneName}</div>
+                                <div class="lane-label">Type of Trailer:</div>
+                                <div class="lane-value slds-text-title_bold">{account.trailerType}</div>
+                            </div>
+                        </template>
+                        <template if:false={account.isFirst}>
+                            <div class="lane-info-placeholder-summary lane-info">&nbsp;</div>
+                        </template>
+
+                        <div class="header">
+                            <div class="account-title">{account.laneHeaderLabel}</div>
+                            <div class="account-name">{account.accountName}</div>
+                        </div>
+
+                        <h2 class="slds-text-heading_small slds-text-title_bold">
+                            <span>{account.laneResultLabel}</span>
+                        </h2>
+
+                        <div class="total-section">
+                            <div class="total-price">
+                                <span>Lane Price:</span>
+                                <span>{account.lanePrice} €</span>
+                            </div>
+                            <div class="total-price1">
+                                <span>Total Price: {account.totalPrice} €</span>
+                                <span class="total-price-with-icon">
+                                    <lightning-icon 
+                                        icon-name={account.chevronIcon} 
+                                        size="small" 
+                                        alternative-text="Details" 
+                                        class="clickable-icon"
+                                        data-account-id={account.accountId}
+                                        onclick={handleTotalPriceClick}>
+                                    </lightning-icon>
+                                </span>
+                            </div>
+                        </div>
+
+                        <template if:true={account.expanded}>
+                            <div class="section-title slds-text-title_bold">{account.priceSectionLabel}</div>
+
+                            <div class="pricing-section">
+                                <template if:true={account.fuelSurchargePercentage}>
+                                    <template if:true={account.fuelSurchargePercentageIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Fuel Surcharge</span>
+                                            <span class="price-value">{account.fuelSurchargePercentage} %</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.seasonalSurcharge}>
+                                    <template if:true={account.seasonalSurchargeIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Seasonal Surcharge</span>
+                                            <span class="price-value">{account.seasonalSurcharge} %</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.overnightPrice}>
+                                    <template if:true={account.overnightPriceIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Overnight Price</span>
+                                            <span class="price-value">€ {account.overnightPrice}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.harbourDues}>
+                                    <template if:true={account.harbourDuesIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Harbour dues</span>
+                                            <span class="price-value">€ {account.harbourDues}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.waitingHour}>
+                                    <template if:true={account.waitingHourIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Waiting Hour ({account.waitingHourQuantity}x)</span>
+                                            <span class="price-value">€ {account.waitingHour}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.plugIn}>
+                                    <template if:true={account.plugInIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Plug In</span>
+                                            <span class="price-value">€ {account.plugIn}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.weekendCharges}>
+                                    <template if:true={account.weekendChargesIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Weekend Charges</span>
+                                            <span class="price-value">€ {account.weekendCharges}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.dangerousGoods}>
+                                    <template if:true={account.dangerousGoodsIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Dangerous Goods</span>
+                                            <span class="price-value">€ {account.dangerousGoods}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.palletExchange}>
+                                    <template if:true={account.palletExchangeIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Pallet Exchange ({account.palletExchangeQuantity}x)</span>
+                                            <span class="price-value">€ {account.palletExchange}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.tailLift}>
+                                    <template if:true={account.tailLiftIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Tail Lift</span>
+                                            <span class="price-value">€ {account.tailLift}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.ets}>
+                                    <template if:true={account.etsIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">ETS</span>
+                                            <span class="price-value">€ {account.ets}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.priceFerry}>
+                                    <template if:true={account.priceFerryIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Price Ferry</span>
+                                            <span class="price-value">€ {account.priceFerry}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.price2ndDriver}>
+                                    <template if:true={account.price2ndDriverIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">2nd Driver</span>
+                                            <span class="price-value">€ {account.price2ndDriver}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.priceAdditionalStops}>
+                                    <template if:true={account.priceAdditionalStopsIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Additional Stops ({account.additionalStopsQuantity}x)</span>
+                                            <span class="price-value">€ {account.priceAdditionalStops}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={account.palletJack}>
+                                    <template if:true={account.palletJackIncluded}>
+                                        <div class="price-row">
+                                            <span class="price-label">Pallet Jack</span>
+                                            <span class="price-value">€ {account.palletJack}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

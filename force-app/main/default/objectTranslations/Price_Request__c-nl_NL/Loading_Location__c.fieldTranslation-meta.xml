@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Loading Location --></label>
+    <name>Loading_Location__c</name>
+    <relationshipLabel><!-- Price Requests (Loading Location) --></relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,9 @@
+<aura:component implements="lightning:actionOverride" access="global">
+    <c:OverrideNewButtonFlow 
+        flowName="PriceRequestCreate"
+        popupHeader="New Price Request"
+        sendRecordTypeIdToFlow="false"
+		scope="Price_Request__c"
+        tryToOpenNewRecord="true"
+        masterRecordId=""/>
+</aura:component>

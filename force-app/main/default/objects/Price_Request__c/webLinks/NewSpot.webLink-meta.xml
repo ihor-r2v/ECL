@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NewSpot</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Spot</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>/lightning/action/quick/QuickActionStation__c.NewSpot?recordId=a07TX000017bJ42YAE&amp;backgroundContext=%2Flightning%2Fo%2FPrice_Request__c%2Flist%3FfilterName%3DAll</url>
+</WebLink>

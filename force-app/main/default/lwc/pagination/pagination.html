@@ -1,0 +1,47 @@
+<template>
+    <div class="pagination-wrapper">
+        <lightning-button
+            variant="neutral"
+            label="First"
+            onclick={handleFirstPage}
+            disabled={disablePrevious}>
+        </lightning-button>
+        
+        <lightning-button
+            variant="neutral"
+            icon-name="utility:chevronleft"
+            onclick={handlePreviousPage}
+            disabled={disablePrevious}>
+        </lightning-button>
+        
+        <template for:each={pageNumbers} for:item="page">
+            <template key={page.number} if:false={page.isEllipsis}>
+                <lightning-button
+                    key={page.number}
+                    variant={page.isCurrent}
+                    label={page.number}
+                    data-page={page.number}
+                    onclick={handlePageClick}
+                    class="page-number-btn">
+                </lightning-button>
+            </template>
+            <template key={page.number} if:true={page.isEllipsis}>
+                <span key={page.number} style="display: flex; align-items: center; padding: 0 0.25rem;">...</span>
+            </template>
+        </template>
+        
+        <lightning-button
+            variant="neutral"
+            icon-name="utility:chevronright"
+            onclick={handleNextPage}
+            disabled={disableNext}>
+        </lightning-button>
+        
+        <lightning-button
+            variant="neutral"
+            label="Last"
+            onclick={handleLastPage}
+            disabled={disableNext}>
+        </lightning-button>
+    </div>
+</template>

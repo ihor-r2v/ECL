@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Nieuw</fullName>
+        <default>true</default>
+        <label>Nieuw</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Beoordeeld</fullName>
+        <default>false</default>
+        <label>Beoordeeld</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Onderbroken</fullName>
+        <default>false</default>
+        <label>Onderbroken</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Genegeerd</fullName>
+        <default>false</default>
+        <label>Genegeerd</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Opgelost</fullName>
+        <default>false</default>
+        <label>Opgelost</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Nietig verklaard</fullName>
+        <default>false</default>
+        <label>Nietig verklaard</label>
+    </standardValue>
+</StandardValueSet>

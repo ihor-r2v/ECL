@@ -1,0 +1,20 @@
+<template>
+    <div>
+        <lightning-combobox
+            label={picklistLabel}
+            value={selectedLocationId}
+            options={locationOptions}
+            onchange={handleSelection}
+            oninput={handleSearch}
+            placeholder=""
+        ></lightning-combobox>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error">Error loading locations: {error}</div>
+        </template>
+    </div>
+</template>

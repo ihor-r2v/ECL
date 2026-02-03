@@ -1,0 +1,79 @@
+.main-container {
+    display: flex;
+    gap: 30px;
+    min-height: 500px;
+}
+
+.filters-container {
+    flex: 0 0 300px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.results-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.mode-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: #0176d3;
+    transform: translateY(-2px);
+}
+
+.mode-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    --slds-c-icon-color-foreground-default: #0176d3;
+}
+
+.mode-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.mode-description {
+    font-size: 13px;
+    text-align: center;
+    color: #666;
+    line-height: 1.4;
+}
+
+.info-section {
+    text-align: center;
+    max-width: 500px;
+    color: #706e6b;
+}
+
+.info-section h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.info-section p {
+    font-size: 14px;
+    line-height: 1.6;
+}

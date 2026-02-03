@@ -1,0 +1,276 @@
+<template>
+    <div class="account-details">
+        <div class="routeCharges">
+            <template if:true={showDangerousGoods}>
+                <lightning-input 
+                    type="number" 
+                    label="Dangerous goods (€)" 
+                    value={accountData.Dangerous_Goods_Price__c} 
+                    name="Dangerous_Goods_Price__c"
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    onchange={handleFieldChange} 
+                    placeholder="Enter Dangerous goods price"
+                    step="0.01"
+                    read-only={readOnly}
+                    required
+                    data-default="0">
+                </lightning-input>
+            </template>
+
+            <template if:true={showDirectFerry}>
+                <lightning-input 
+                    type="number" 
+                    label="Direct ferry (€)" 
+                    value={accountData.Price_Ferry__c} 
+                    name="Price_Ferry__c"
+                    onchange={handleFieldChange}
+                    data-default="0"
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    read-only={readOnly}
+                    placeholder="Enter Direct Ferry price"
+                    required
+                    step="0.01">
+                </lightning-input>
+            </template>
+
+            <template if:true={showETS}>
+                <lightning-input 
+                    type="number" 
+                    label="ETS - price p/ton (€)" 
+                    value={accountData.ETS__c} 
+                    name="ETS__c"
+                    onchange={handleFieldChange} 
+                    step="0.01"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    required
+                    data-default="0"
+                    placeholder="Enter ETS price">
+                </lightning-input>
+            </template>
+
+            <template if:true={showFuelSurchargePercentage}>
+                <lightning-input 
+                    type="number" 
+                    label="Fuel surcharge percentage (%)" 
+                    value={accountData.Fuel_surcharge_percentage__c} 
+                    name="Fuel_surcharge_percentage__c"
+                    onchange={handleFieldChange}
+                    step="0.01"
+                    max="100"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    required
+                    data-default="0"
+                    placeholder="Enter Fuel surcharge percentage">
+                </lightning-input>
+            </template>
+
+            <template if:true={showHarbourDues}>
+                <lightning-input 
+                    type="number" 
+                    label="Harbour dues - price p/ton (€)" 
+                    value={accountData.Harbour_Dues__c} 
+                    name="Harbour_Dues__c"
+                    read-only={readOnly}
+                    onchange={handleFieldChange} 
+                    step="0.01"
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    required
+                    data-default="0"
+                    placeholder="Enter Harbour dues price">
+                </lightning-input>
+            </template>
+
+            <template if:true={showOvernightCharges}>
+                <lightning-input 
+                    type="number" 
+                    label="Overnight charges price (€)" 
+                    value={accountData.Overnight_charges_Price__c} 
+                    name="Overnight_charges_Price__c"
+                    onchange={handleFieldChange}
+                    step="0.01"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    required
+                    data-default="0"
+                    placeholder="Enter Overnight charges price">
+                </lightning-input>
+            </template>
+
+            <template if:true={showPalletExchange}>
+                <lightning-input 
+                    type="number" 
+                    label="Pallet exchange price p/pallet (€)" 
+                    value={accountData.Pallet_Exchange_Price__c} 
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    name="Pallet_Exchange_Price__c"
+                    onchange={handleFieldChange} 
+                    placeholder="Enter Pallet exchange price"
+                    step="0.01"
+                    required
+                    read-only={readOnly}
+                    data-default="0">
+                </lightning-input>
+            </template>
+
+            <template if:true={showPalletJack}>
+                <lightning-input 
+                    type="number" 
+                    label="Pallet jack (€)" 
+                    value={accountData.Pallet_Jack_Price__c} 
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    name="Pallet_Jack_Price__c"
+                    onchange={handleFieldChange} 
+                    placeholder="Enter Pallet jack price"
+                    required
+                    read-only={readOnly}
+                    step="0.01"
+                    data-default="0">
+                </lightning-input>
+            </template>
+
+            <template if:true={showPlugIn}>
+                <lightning-input 
+                    type="number" 
+                    label="Plug-in (€)" 
+                    value={accountData.Plug_in__c} 
+                    name="Plug_in__c"
+                    read-only={readOnly}
+                    onchange={handleFieldChange} 
+                    step="0.01"
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    required
+                    data-default="0"
+                    placeholder="Enter Plug-in price">
+                </lightning-input>
+            </template>
+
+            <template if:true={showAdditionalStops}>
+                <lightning-input 
+                    type="number" 
+                    label="Price per stop (€)" 
+                    value={accountData.Price_Per_Stop__c} 
+                    name="Price_Per_Stop__c"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    onchange={handleFieldChange} 
+                    step="0.01"
+                    required
+                    data-default="0"
+                    placeholder="Enter Price Per Stop">
+                </lightning-input>
+            </template>
+            
+            <template if:true={showSeasonalSurcharge}>
+                <lightning-input 
+                    type="number" 
+                    label="Seasonal surcharge (€)" 
+                    value={accountData.Seasonal_Surcharge__c} 
+                    name="Seasonal_Surcharge__c"
+                    onchange={handleFieldChange}
+                    data-default="0"
+                    read-only={readOnly}
+                    placeholder="Enter Seasonal surcharge"
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    required
+                    step="0.01">
+                </lightning-input>
+            </template>
+
+            <template if:true={showTailLift}>
+                <lightning-input 
+                    type="number" 
+                    label="Tail lift (€)" 
+                    value={accountData.Tail_Lift_Price__c} 
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    name="Tail_Lift_Price__c"
+                    onchange={handleFieldChange} 
+                    placeholder="Enter Tail lift price"
+                    step="0.01"
+                    read-only={readOnly}
+                    required
+                    data-default="0">
+                </lightning-input>
+            </template>
+
+            <template if:true={showTwoDrivers}>
+                <lightning-input 
+                    type="number" 
+                    label="Two drivers (€)" 
+                    value={accountData.Price_2nd_Driver__c} 
+                    name="Price_2nd_Driver__c"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    onchange={handleFieldChange}
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    placeholder="Enter Two Drivers price"
+                    step="0.01"
+                    data-default="0"
+                    required>
+                </lightning-input>
+            </template>
+
+            <template if:true={showWaitingHour}>
+                <lightning-input 
+                    type="number" 
+                    label="Waiting costs p/hour (€)" 
+                    value={accountData.Waiting_Hour__c} 
+                    name="Waiting_Hour__c"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    onchange={handleFieldChange} 
+                    step="0.01"
+                    required
+                    data-default="0"
+                    placeholder="Enter Waiting hour price">
+                </lightning-input>
+            </template>
+
+            <template if:true={showWeekendCharges}>
+                <lightning-input 
+                    type="number" 
+                    label="Weekend charges (€)" 
+                    value={accountData.Weekend_Charges__c} 
+                    name="Weekend_Charges__c"
+                    read-only={readOnly}
+                    field-level-help="Changing this price will change your prices for all your route/lane submissions"
+                    pattern="[0-9]+(\.[0-9]{1,2})?"
+                    message-when-pattern-mismatch={patternText}
+                    onchange={handleFieldChange} 
+                    placeholder="Enter Weekend charges price"
+                    step="0.01"
+                    data-default="0"
+                    required>
+                </lightning-input>
+            </template>
+        </div>
+    </div>
+</template>

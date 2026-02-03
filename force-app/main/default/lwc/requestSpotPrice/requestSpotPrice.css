@@ -1,0 +1,309 @@
+.slds-card__header-title {
+    display: block;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.account-column-lane-selector {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.account-column-lane-selector.selected {
+    border: 2px solid green;
+}
+
+.header-lane-selector {
+    margin-bottom: 10px;
+}
+
+.account-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.account-name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-name-lane-selector {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.lane-info {
+    margin-bottom: 20px;
+}
+
+.lane-label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.lane-value {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.header-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+    gap: 10px;
+}
+
+.price-label {
+    color: #666;
+    flex: 1;
+    text-align: left;
+    font-size: 12px;
+}
+
+.price-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 100px;
+}
+
+.inline-quantity-input {
+    display: inline-block;
+    width: 40px;
+    margin: 0 2px;
+}
+
+.price-value {
+    color: #333;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.header-navigation h3 {
+    position: absolute;
+    left: 0.5rem;
+}
+
+.price-variables-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.select-button-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.select-button {
+    padding: 8px 24px;
+    background-color: white;
+    color: green;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid green;
+    width: 100%;
+}
+
+.select-button-picked {
+    padding: 8px 24px;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid green;
+    width: 100%;
+}
+
+.select-button:hover {
+    background-color: green;
+    color: white;
+}
+
+.button-container {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.main-container {
+    display: flex;
+    gap: 30px;
+    min-height: 500px;
+}
+
+.filters-container {
+    flex: 0 0 300px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.results-container {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+}
+
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    color: #706e6b;
+}
+
+.accounts-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.accounts-container.potential-carriers {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.button-group-navigation {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button-group-bottom {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.button-container {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.header-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+}
+
+.header-navigation h3 {
+    position: absolute;
+    left: 0.5rem;
+}
+
+
+/* Copy all existing styles and add these: */
+
+.lane-name-header {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.lane-name-header h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0.5rem;
+    margin-top: 15px;
+}
+
+.score-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+}
+
+.score-title {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.score-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.preferred-label {
+    color: green;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.total-section-lane-selector {
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    align-items: center;
+}
+
+.lane-price {
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.navigate-link {
+    color: #0176d3;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.navigate-link:hover {
+    text-decoration: underline;
+}

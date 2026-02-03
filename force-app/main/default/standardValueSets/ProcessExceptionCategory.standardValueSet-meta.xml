@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Activatie van order</fullName>
+        <default>true</default>
+        <label>Activatie van order</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Goedkeuring van order</fullName>
+        <default>false</default>
+        <label>Goedkeuring van order</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Uitvoering</fullName>
+        <default>false</default>
+        <label>Uitvoering</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Betaling</fullName>
+        <default>false</default>
+        <label>Betaling</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Facturatie</fullName>
+        <default>false</default>
+        <label>Facturatie</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order plaatsen</fullName>
+        <default>false</default>
+        <label>Order plaatsen</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Orderitemsamenvatting naar activum</fullName>
+        <default>false</default>
+        <label>Orderitemsamenvatting naar activum</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order naar activum</fullName>
+        <default>false</default>
+        <label>Order naar activum</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order naar factureringsschema</fullName>
+        <default>false</default>
+        <label>Order naar factureringsschema</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Betaling van abonnement</fullName>
+        <default>false</default>
+        <label>Betaling van abonnement</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Annuleren</fullName>
+        <default>false</default>
+        <label>Annuleren</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Betaling crediteren</fullName>
+        <default>false</default>
+        <label>Betaling crediteren</label>
+    </standardValue>
+</StandardValueSet>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lane_Price__c</fullName>
+    <deleteConstraint>Cascade</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Lane Price</label>
+    <referenceTo>Lane_Price__c</referenceTo>
+    <relationshipLabel>Preferred Suppliers</relationshipLabel>
+    <relationshipName>Preferred_Suppliers</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

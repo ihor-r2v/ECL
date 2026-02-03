@@ -1,0 +1,45 @@
+<template>
+    <lightning-card class="slds-var-p-around_medium">
+        <p class="slds-text-heading_medium slds-text-align_center">Lane Prices</p>
+        
+        <div class="slds-grid slds-gutters_xx-small slds-var-m-bottom_small slds-var-m-top_small">
+            <div class="slds-col">
+                <lightning-combobox
+                    name="seasons"
+                    variant="label-hidden"
+                    placeholder="Select season"
+                    options={seasonOptions}
+                    onchange={handleSeasonChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-var-m-right_xx-small">
+                <lightning-input
+                    type="search"
+                    name="search"
+                    variant="label-hidden"
+                    onchange={handleSearchChange}
+                    placeholder="Search lanes"
+                    class="search-input">
+                </lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-var-m-bottom_x-small slds-text-body_small slds-text-color_weak">
+            {recordInfo}
+        </div>
+
+        <div class="table-dimensions">
+            <lightning-datatable
+                key-field="lanePriceId"
+                columns={columns}
+                data={data}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                onloadmore={handleLoadMore}
+                enable-infinite-loading
+                is-loading={isLoading}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

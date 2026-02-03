@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Type Of Trailer --></label>
+    <name>Trailer_Type__c</name>
+    <picklistValues>
+        <masterLabel>Box trailer</masterLabel>
+        <translation><!-- Box trailer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Curtainside - ambient</masterLabel>
+        <translation><!-- Curtainside - ambient --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Dual temp</masterLabel>
+        <translation><!-- Dual temp --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Frigo - ambient</masterLabel>
+        <translation><!-- Frigo - ambient --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Frigo - chilled</masterLabel>
+        <translation><!-- Frigo - chilled --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Frigo - frozen</masterLabel>
+        <translation><!-- Frigo - frozen --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Frigo - split wall</masterLabel>
+        <translation><!-- Frigo - split wall --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="selectedLocationId" type="String" role="outputOnly" label="Selected Location Id"/>
+            <property name="typeValue" type="String" role="inputOnly" label="Location Type Input"/>
+            <property name="picklistLabel" type="String" role="inputOnly" label="Picklist Label"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

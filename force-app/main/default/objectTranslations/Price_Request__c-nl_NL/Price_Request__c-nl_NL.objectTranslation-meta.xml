@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Price Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Price Requests</value>
+    </caseValues>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Price Request Layout</layout>
+        <sections>
+            <label><!-- Additional information configuration --></label>
+            <section>Additional information configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Add Lanes --></label>
+        <name>Add_Lanes</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Clone --></label>
+        <name>Clone</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Send To Carrier --></label>
+        <name>Send_To_Carrier</name>
+    </quickActions>
+    <webLinks>
+        <label><!-- NewSpot --></label>
+        <name>NewSpot</name>
+    </webLinks>
+</CustomObjectTranslation>

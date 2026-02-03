@@ -1,0 +1,10 @@
+<aura:component implements="lightning:actionOverride" access="global">
+    <c:OverrideNewButtonFlow 
+        flowName="New_Lane"
+        popupHeader="New Location"
+        sendRecordTypeIdToFlow="false"
+		scope="Location__c"
+        tryToOpenNewRecord="true"
+        masterRecordId=""
+	/>
+</aura:component>

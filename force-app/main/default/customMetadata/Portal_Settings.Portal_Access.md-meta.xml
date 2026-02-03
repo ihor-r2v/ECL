@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Portal Access</label>
+    <protected>false</protected>
+    <values>
+        <field>Portal_Access_Code__c</field>
+        <value xsi:type="xsd:string">EuCrL0g!25x</value>
+    </values>
+    <values>
+        <field>Portal_URL__c</field>
+        <value xsi:type="xsd:string">https://velocity-ability-8331.my.site.com</value>
+    </values>
+</CustomMetadata>

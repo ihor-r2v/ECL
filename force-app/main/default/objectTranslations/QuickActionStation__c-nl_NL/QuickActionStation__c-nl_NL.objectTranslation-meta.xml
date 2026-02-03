@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quick Action Station</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quick Action Stations</value>
+    </caseValues>
+    <gender>Neuter</gender>
+    <quickActions>
+        <label><!-- New Spot --></label>
+        <name>NewSpot</name>
+    </quickActions>
+</CustomObjectTranslation>

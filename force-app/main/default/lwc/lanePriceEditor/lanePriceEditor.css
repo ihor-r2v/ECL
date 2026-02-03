@@ -1,0 +1,372 @@
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0.25rem;
+    padding: 2rem;
+}
+
+.error-message {
+    color: red;
+    height: 0px;
+    font-size: 10px;
+}
+
+.page-title {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-right: 4rem;
+}
+
+.page-title {
+    color: white;
+}
+
+.table-container {
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.75rem;
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+.buttonsGrid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+lightning-input {
+    --lwc-borderRadiusInput: 1rem;
+    --lwc-colorBorderInput: #104fff;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo-image {
+    max-height: 60px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.compact-ui {
+    --slds-c-input-spacing-horizontal-end: 0.5rem;
+    --slds-c-input-spacing-horizontal-start: 0.5rem;
+    --slds-c-input-height: 1.75rem;
+    --slds-c-button-spacing-block: 0.25rem;
+}
+
+.compact-ui .slds-text-heading_large {
+    font-size: 1.25rem !important;
+}
+
+.compact-ui .slds-text-heading_medium {
+    font-size: 1rem !important;
+}
+
+.compact-ui lightning-card {
+    --slds-c-card-spacing-block: 0.5rem;
+}
+
+.compact-ui .slds-p-horizontal_medium,
+.compact-ui .slds-p-horizontal_small {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+.compact-ui .slds-m-bottom_medium {
+    align-items: center;
+}
+
+.compact-ui lightning-input,
+.compact-ui lightning-combobox {
+    margin-bottom: 0.25rem;
+}
+
+.compact-ui lightning-input .slds-form-element__label {
+    font-size: 0.75rem !important;
+}
+
+.compact-ui lightning-datatable {
+    --lwc-fontSize: 0.75rem;
+    font-size: 0.75rem !important;
+}
+
+.compact-ui .slds-table th, 
+.compact-ui .slds-table td {
+    padding: 0.25rem 0.5rem !important;
+    height: 1.75rem !important;
+    font-size: 0.75rem !important;
+}
+
+.compact-ui .slds-table th .slds-truncate {
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+}
+
+
+.compact-ui lightning-button button {
+    line-height: 1.5rem !important;
+    font-size: 0.75rem !important;
+}
+
+.compact-ui c-custom-datatable {
+    font-size: 0.75rem !important;
+}
+
+.compact-ui c-custom-datatable lightning-datatable,
+.compact-ui c-custom-datatable .slds-table {
+    font-size: 0.75rem !important;
+}
+
+.compact-ui c-custom-datatable .slds-table th,
+.compact-ui c-custom-datatable .slds-table th .slds-truncate {
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+}
+
+.compact-ui c-custom-datatable .slds-table td {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    height: 1.75rem !important;
+}
+
+.compact-ui c-custom-datatable lightning-combobox,
+.compact-ui c-custom-datatable lightning-formatted-text {
+    font-size: 0.75rem !important;
+}
+
+.compact-ui c-custom-datatable .slds-cell-edit lightning-input,
+.compact-ui c-custom-datatable .slds-cell-edit lightning-combobox {
+    font-size: 0.75rem !important;
+}
+
+.compact-ui c-custom-datatable lightning-combobox .slds-combobox__input {
+    font-size: 0.75rem !important;
+    height: 1.75rem !important;
+}
+
+.compact-ui .slds-form-element {
+    margin-bottom: 0.5rem;
+}
+
+.header-content {
+    align-items: anchor-center;
+    text-align: left;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+lightning-input.error input {
+    border-color: #c23934 !important;
+    box-shadow: 0 0 0 2px rgba(194, 57, 52, 0.1) !important;
+}
+
+.decimal-note {
+    display: block;
+    margin: 0.5rem auto 1rem;
+    padding: 0.5rem 0.75rem;
+    max-width: 900px;
+    border-radius: 0.5rem;
+    background: #fff8e1;
+    color: #805600;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #ffecb3;
+}
+
+.decimal-note.no-max-width {
+    max-width: none;
+}
+
+.decimal-note.error {
+    background: #fdecea;
+    color: #a21919;
+    border-color: #f5c6c6;
+}
+
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 5rem;
+}
+
+.login-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    margin-left: 5rem;
+    border-radius: 0.5rem;
+    min-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.login-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #16325c;
+}
+
+.login-input {
+    margin-bottom: 1rem;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.success-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.success-content {
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.success-logo {
+    max-height: 80px;
+    width: auto;
+}
+
+.success-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.success-message-container {
+    margin-top: 2rem;
+}
+
+.success-message-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.success-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.success-thank-you-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00D924;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.success-login-button {
+    --slds-c-button-brand-color-background: #00D924;
+    --slds-c-button-brand-color-border: #00D924;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0, 217, 36, 0.3);
+    transition: all 0.3s ease;
+}
+
+.success-login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 217, 36, 0.4);
+}
+
+@media (max-width: 768px) {    
+    .center {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .login-content {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        margin-left: 5rem;
+        border-radius: 0.5rem;
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .custom-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
+        min-width: 300px;
+        max-width: 500px;
+        animation: slideIn 0.3s ease-out;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .slds-alert_success {
+        background-color: #04844b;
+        color: white;
+    }
+
+    .slds-alert_error {
+        background-color: #c23934;
+        color: white;
+    }
+
+    .slds-alert_info {
+        background-color: #0176d3;
+        color: white;
+    }
+
+    .slds-alert_warning {
+        background-color: #fe9339;
+        color: white;
+    }
+}
