@@ -17,9 +17,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Run linter
         run: npm run lint
 
@@ -31,9 +31,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -49,9 +49,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Run tests
         run: npm test
 
@@ -61,18 +61,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-        with: { node-version: 16 }
-      - run: npm install
+        with: { node-version: 18 }
+      - run: npm install --legacy-peer-deps
       - run: npm run build
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
+          
   release:
     needs: build
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}git add .github/workflows/ci-cd.yml
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v4
