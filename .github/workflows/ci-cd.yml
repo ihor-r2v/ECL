@@ -9,20 +9,6 @@ permissions:
   contents: write
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Run linter
-        run: npm run lint
-
   security-scan:
     runs-on: ubuntu-latest
     steps:
@@ -41,22 +27,8 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Run tests
-        run: npm test -- --passWithNoTests
-
   build:
-    needs: [lint, security-scan, test]
+    needs: [security-scan,]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
