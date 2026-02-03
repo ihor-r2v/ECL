@@ -12,8 +12,9 @@
     "test:unit:coverage": "sfdx-lwc-jest --coverage",
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
-    "postinstall": "husky install",
-    "precommit": "lint-staged"
+    "postinstall": "is-ci || husky install",
+    "precommit": "lint-staged",
+    "prepare": "is-ci || husky install"
   },
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^2.0.0",
@@ -24,7 +25,9 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^28.8.3",
     "prettier": "^3.3.3",
-    "prettier-plugin-apex": "^2.1.4"
+    "prettier-plugin-apex": "^2.1.4",
+    "is-ci": "^3.0.1",
+    "husky": "^8.0.0"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
