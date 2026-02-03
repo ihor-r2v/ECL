@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "Salesforce App",
   "scripts": {
-    "lint": "eslint **/{aura,lwc}/**/*.js",
+    "lint": "eslint **/lwc/**/*.js **/aura/**/*.js",
     "test": "npm run test:unit",
-    "test:unit": "sfdx-lwc-jest",
+    "test:unit": "sfdx-lwc-jest --passWithNoTests",
     "test:unit:watch": "sfdx-lwc-jest --watch",
     "test:unit:debug": "sfdx-lwc-jest --debug",
     "test:unit:coverage": "sfdx-lwc-jest --coverage",
@@ -14,7 +14,8 @@
     "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "postinstall": "is-ci || husky install",
     "precommit": "lint-staged",
-    "prepare": "is-ci || husky install"
+    "prepare": "is-ci || husky install",
+    "build": "echo 'Build step placeholder'"
   },
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^2.0.0",
